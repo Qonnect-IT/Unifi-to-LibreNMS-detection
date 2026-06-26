@@ -1,0 +1,35 @@
+services:
+  unifi-librenms-sync:
+    build: .
+    container_name: unifi-librenms-sync
+    restart: "no"
+
+    environment:
+      UNIFI_URL: "https://cloudkey.example.local"
+      UNIFI_USERNAME: "librenms-sync"
+      UNIFI_PASSWORD: "change-me"
+      UNIFI_SITES: "default"
+      UNIFI_VERIFY_SSL: "false"
+
+      LIBRENMS_URL: "https://librenms.example.local"
+      LIBRENMS_TOKEN: "change-me"
+
+      # Important in your multi-tier LibreNMS setup:
+      # Use the poller group ID that should poll these APs.
+      LIBRENMS_POLLER_GROUP: "2"
+
+      # dns or ip
+      HOSTNAME_MODE: "dns"
+      HOSTNAME_DOMAIN: "mgmt.example.local"
+
+      SNMP_VERSION: "v2c"
+      SNMP_COMMUNITY: "your-community"
+
+      PING_FALLBACK: "true"
+      FORCE_ADD: "false"
+
+      DEVICE_LOCATION: "Main Office"
+      OVERRIDE_SYSLOCATION: "false"
+
+      # Start safe
+      DRY_RUN: "true"
