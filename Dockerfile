@@ -8,10 +8,15 @@ LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
 
-RUN adduser -D -h /app appuser
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN apk upgrade --no-cache \
+    && python -m pip install --no-cache-dir --upgrade "pip==26.1.2" \
+    && adduser -D -h /app appuser
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY sync.py .
 
