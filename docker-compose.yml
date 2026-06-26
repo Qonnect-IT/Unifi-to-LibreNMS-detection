@@ -1,7 +1,9 @@
 services:
   unifi-librenms-sync:
-    build: .
-    container_name: unifi-librenms-sync
+    image: qonnectit/unifi-to-librenms-detection:latest
+    container_name: unifi-to-librenms-detection
+    env_file:
+      - .env
     restart: "no"
 
     environment:
